@@ -3,10 +3,12 @@ import { actionRow } from '../../components/actionRow/actionRow'
 import { renderEmbed } from '../../components/embed/embed'
 import { selectMenu } from '../../components/selectMenu/selectMenu'
 import { InputArgs, SlashCommands } from '../../deploy-commands'
+import { Firebase } from '../../firebase'
 import { CustomIds } from '../../utils'
 
 export const commandInteractions = (interaction: CommandInteraction) => {
   const { commandName } = interaction
+
   if (commandName === SlashCommands.Create) {
     const date = interaction.options.getString(InputArgs.Date)
     const time = interaction.options.getString(InputArgs.Time)
