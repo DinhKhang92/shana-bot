@@ -4,7 +4,7 @@ import { buttonInteractions } from './interactions/buttonInteractions/buttonInte
 import { commandInteractions } from './interactions/commandInteractions/commandInteractions'
 import { selectMenuInteractions } from './interactions/selectMenuInteractions/selectMenuInteractions'
 
-export const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES'] })
+const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES'] })
 
 client.once('ready', () => {
   console.log('Shana ready.')

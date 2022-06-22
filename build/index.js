@@ -12,17 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.client = void 0;
 const discord_js_1 = require("discord.js");
 const config_1 = __importDefault(require("./config"));
 const buttonInteractions_1 = require("./interactions/buttonInteractions/buttonInteractions");
 const commandInteractions_1 = require("./interactions/commandInteractions/commandInteractions");
 const selectMenuInteractions_1 = require("./interactions/selectMenuInteractions/selectMenuInteractions");
-exports.client = new discord_js_1.Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES'] });
-exports.client.once('ready', () => {
+const client = new discord_js_1.Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES'] });
+client.once('ready', () => {
     console.log('Shana ready.');
 });
-exports.client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0, function* () {
+client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0, function* () {
     if (interaction.isCommand()) {
         (0, commandInteractions_1.commandInteractions)(interaction);
     }
@@ -33,4 +32,4 @@ exports.client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0
         (0, buttonInteractions_1.buttonInteractions)(interaction);
     }
 }));
-exports.client.login(config_1.default.TOKEN);
+client.login(config_1.default.TOKEN);
