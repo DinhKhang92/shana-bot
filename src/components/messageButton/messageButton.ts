@@ -1,4 +1,7 @@
 import { MessageButton, MessageButtonStyleResolvable } from 'discord.js'
-import { CustomIds } from '../../utils'
+import { CustomId } from '../../utils'
 
-export const messageButton = (customId: CustomIds, label: string, style: MessageButtonStyleResolvable) => new MessageButton().setCustomId(customId).setLabel(label).setStyle(style)
+export const messageButton = (customId: CustomId, label: string, style: MessageButtonStyleResolvable) => new MessageButton()
+  .setCustomId(customId)
+  .setLabel(label)
+  .setStyle(style)

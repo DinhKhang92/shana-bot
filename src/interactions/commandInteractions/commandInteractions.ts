@@ -1,24 +1,17 @@
 import { CommandInteraction } from 'discord.js'
-import { actionRow } from '../../components/actionRow/actionRow'
-import { renderEmbed } from '../../components/embed/embed'
-import { selectMenu } from '../../components/selectMenu/selectMenu'
-import { InputArgs, SlashCommands } from '../../deploy-commands'
-import { Firebase } from '../../firebase'
-import { CustomIds } from '../../utils'
+import { SlashCommands } from '../../deploy-commands'
+import { characterAdd } from './characterAdd'
+import { createRaid } from './createRaid'
 
 export const commandInteractions = (interaction: CommandInteraction) => {
   const { commandName } = interaction
 
-  if (commandName === SlashCommands.Create) {
-    const date = interaction.options.getString(InputArgs.Date)
-    const time = interaction.options.getString(InputArgs.Time)
-
-    const title = `[${date} ${time}]`
-
-    const row = actionRow([
-      selectMenu(CustomIds.SelectRaid)
-    ])
-
-    return interaction.reply({ embeds: [renderEmbed(title)], ephemeral: true, components: [row] })
+  switch (commandName) {
+    case SlashCommands.Create:
+      createRaid(interaction)
+      break
+    case SlashCommands.CharacterAdd:
+      characterAdd(interaction)
+      break
   }
 }

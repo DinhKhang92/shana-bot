@@ -1,5 +1,5 @@
 import { SelectMenuInteraction } from 'discord.js'
-import { CustomIds } from '../../utils'
+import { CustomId } from '../../utils'
 import { actionRow } from '../../components/actionRow/actionRow'
 import { EventImage, renderEmbed, Thumbnails } from '../../components/embed/embed'
 import { selectMenu } from '../../components/selectMenu/selectMenu'
@@ -19,12 +19,12 @@ export const selectMode = async (interaction: SelectMenuInteraction): Promise<vo
 
   const selectMenuModePlacehoder = 'Mode..'
   const selectOptions = interaction.values.includes(SelectOptionValues.Valtan) ? valtanModeSelectOptions : argosModeSelectOptions
-  const thumbnail = interaction.values.includes(SelectOptionValues.Valtan) ? Thumbnails.Valtan : Thumbnails.Argos
-  const image = interaction.values.includes(SelectOptionValues.Valtan) ? EventImage.Valtan : EventImage.Argos
+  const thumbnailUrl = interaction.values.includes(SelectOptionValues.Valtan) ? Thumbnails.Valtan : Thumbnails.Argos
+  const imageUrl = interaction.values.includes(SelectOptionValues.Valtan) ? EventImage.Valtan : EventImage.Argos
 
   const row = actionRow([
-    selectMenu(CustomIds.SelectFinish, selectMenuModePlacehoder, selectOptions)
+    selectMenu(CustomId.SelectFinish, selectMenuModePlacehoder, selectOptions)
   ])
 
-  await interaction.update({ embeds: [renderEmbed(updatedEmbedTitle, thumbnail, image)], components: [row] })
+  await interaction.update({ embeds: [renderEmbed({ title: updatedEmbedTitle, thumbnailUrl, imageUrl })], components: [row] })
 }
