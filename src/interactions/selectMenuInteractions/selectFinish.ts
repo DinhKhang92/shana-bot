@@ -1,5 +1,5 @@
 import { SelectMenuInteraction } from 'discord.js'
-import { CustomIds } from '../../utils'
+import { CustomId } from '../../utils'
 import { actionRow } from '../../components/actionRow/actionRow'
 import { messageButton } from '../../components/messageButton/messageButton'
 import { updateTitleByMode } from './selectMenuInteractions'
@@ -21,7 +21,7 @@ export const selectFinish = async (interaction: SelectMenuInteraction): Promise<
   embed.title = updateTitleByMode(embedTitle, mode)
 
   const row = actionRow([
-    messageButton(CustomIds.ButtonSend, 'Send', 'PRIMARY')
+    messageButton(CustomId.ButtonSend, 'Send', 'PRIMARY')
   ])
 
   await interaction.update({ embeds: [embed], components: [row] })

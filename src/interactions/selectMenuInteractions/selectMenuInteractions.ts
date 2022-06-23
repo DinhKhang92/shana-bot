@@ -1,5 +1,5 @@
 import { SelectMenuInteraction } from 'discord.js'
-import { CustomIds } from '../../utils'
+import { CustomId } from '../../utils'
 import { SelectOptionValues } from '../../components/selectMenu/selectOptions'
 import { selectFinish } from './selectFinish'
 import { selectMode } from './selectMode'
@@ -9,13 +9,13 @@ export const selectMenuInteractions = async (interaction: SelectMenuInteraction)
   const { customId } = interaction
 
   switch (customId) {
-    case CustomIds.SelectRaid:
+    case CustomId.SelectRaid:
       selectRaid(interaction)
       break
-    case CustomIds.SelectMode:
+    case CustomId.SelectMode:
       selectMode(interaction)
       break
-    case CustomIds.SelectFinish:
+    case CustomId.SelectFinish:
       selectFinish(interaction)
       break
   }

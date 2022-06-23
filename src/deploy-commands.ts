@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from '@discordjs/builders'
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 import config from './config'
-import { CharaterClasses } from './utils'
+import { CharaterClass } from './utils'
 
 export enum SlashCommands {
   Create = 'create',
@@ -17,12 +17,12 @@ export enum InputArgs {
   ILvl = 'ilvl'
 }
 
-const classChoices = () => Object.values(CharaterClasses).map(characterClass => ({
-  name: characterClass, value: characterClass.toLowerCase()
+const classChoices = () => Object.values(CharaterClass).map(characterClass => ({
+  name: characterClass, value: characterClass
 }))
 
 const commands = [
-  new SlashCommandBuilder().setName(SlashCommands.CharacterAdd).setDescription('Add a character')
+  new SlashCommandBuilder().setName(SlashCommands.CharacterAdd).setDescription('Add character')
     .addStringOption(option =>
       option.setName(InputArgs.Name)
         .setDescription('Character name')

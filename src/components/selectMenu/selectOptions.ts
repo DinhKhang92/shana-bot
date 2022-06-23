@@ -1,5 +1,5 @@
 import { MessageSelectOptionData } from 'discord.js'
-import { Emojis } from '../../utils'
+import { Icon } from '../../utils'
 
 export enum SelectOptionValues {
     AbyssLegionRaids = 'abyss_legion_raids',
@@ -18,12 +18,12 @@ export const defaultSelectOptions: MessageSelectOptionData[] = [
   {
     label: 'Legion/Abyss Raids',
     value: SelectOptionValues.AbyssLegionRaids,
-    emoji: Emojis.LegionCommander
+    emoji: Icon.LegionCommander
   },
   {
     label: 'Abyss Dungeons',
     value: SelectOptionValues.AbyssDungeons,
-    emoji: Emojis.Abyss
+    emoji: Icon.Abyss
   }
 ]
 
