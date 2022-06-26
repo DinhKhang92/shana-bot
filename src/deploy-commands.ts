@@ -6,7 +6,8 @@ import { CharaterClass } from './utils'
 
 export enum SlashCommands {
   Create = 'create',
-  CharacterAdd = 'character-add'
+  CharacterAdd = 'character-add',
+  CharacterUpdate = 'character-update'
 }
 
 export enum InputArgs {
@@ -29,12 +30,12 @@ const commands = [
         .setRequired(true))
     .addStringOption(option =>
       option.setName(InputArgs.Class)
-        .setDescription('character class')
+        .setDescription('Character class')
         .addChoices(...classChoices())
         .setRequired(true))
     .addNumberOption(option =>
       option.setName(InputArgs.ILvl)
-        .setDescription('character ilvl')
+        .setDescription('Character ilvl')
         .setRequired(true)),
   new SlashCommandBuilder().setName(SlashCommands.Create).setDescription('Create an event')
     .addStringOption(option =>
@@ -44,7 +45,8 @@ const commands = [
     .addStringOption(option =>
       option.setName(InputArgs.Time)
         .setDescription('Time of event: hh:mm')
-        .setRequired(true))
+        .setRequired(true)),
+  new SlashCommandBuilder().setName(SlashCommands.CharacterUpdate).setDescription('Update character')
 ]
 
 const rest = new REST({ version: '9' }).setToken(config.TOKEN)

@@ -2,6 +2,7 @@ import { Client } from 'discord.js'
 import config from './config'
 import { buttonInteractions } from './interactions/buttonInteractions/buttonInteractions'
 import { commandInteractions } from './interactions/commandInteractions/commandInteractions'
+import { modalSubmitInteractions } from './interactions/modalSubmitInteractions/modalSubmitInteractions'
 import { selectMenuInteractions } from './interactions/selectMenuInteractions/selectMenuInteractions'
 
 const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'DIRECT_MESSAGES'] })
@@ -10,7 +11,7 @@ client.once('ready', () => {
   console.log('Shana ready.')
 })
 
-client.on('interactionCreate', async interaction => {
+client.on('interactionCreate', interaction => {
   if (interaction.isCommand()) {
     commandInteractions(interaction)
   }
@@ -21,6 +22,10 @@ client.on('interactionCreate', async interaction => {
 
   if (interaction.isButton()) {
     buttonInteractions(interaction)
+  }
+
+  if (interaction.isModalSubmit()) {
+    modalSubmitInteractions(interaction)
   }
 })
 
