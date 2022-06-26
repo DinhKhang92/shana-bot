@@ -20,13 +20,18 @@ export interface EmbedProps {
 }
 
 export const renderEmbed = ({ title, thumbnailUrl, imageUrl, description, fields }: EmbedProps): MessageEmbed => {
-  return new MessageEmbed()
+  const embed = new MessageEmbed()
     .setColor('#0099ff')
     .setTitle(title ?? '')
     .setDescription(description ?? '')
     .setThumbnail(thumbnailUrl ?? '') // https://lostarkcodex.com/icons/freindshipnpc_img_119.webp
     .setImage(imageUrl ?? '')
-    .setFields(...fields ?? {})
+
+  if (fields !== undefined) {
+    embed.setFields(...fields)
+  }
+
+  return embed
 }
 
 // { name: '\u200B', value: '\u200B' },

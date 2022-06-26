@@ -9,20 +9,20 @@ import { mapCharacterClassToIcon } from '../../utils'
 const firebase = new Firebase()
 
 export const characterAdd = (interaction: CommandInteraction) => {
-  const id = v4()
-  const name = interaction.options.getString(InputArgs.Name, true)
-  const characterClass = interaction.options.getString(InputArgs.Class, true)
-  const iLvl = interaction.options.getNumber(InputArgs.ILvl, true)
+  const character: Character = {
+    id: v4(),
+    name: interaction.options.getString(InputArgs.Name, true),
+    characterClass: interaction.options.getString(InputArgs.Class, true),
+    iLvl: interaction.options.getNumber(InputArgs.ILvl, true)
+  }
 
-  const character = new Character(id, name, characterClass, iLvl)
+  firebase.writeToDatabase(character, `users/${interaction.user.id}/${character.id}`)
 
-  firebase.writeToDatabase(character, `users/${interaction.user.id}/${id}`)
-
-  const title = `${name} was added successfully`
+  const title = `${character.name} was added successfully`
   const thumbnailUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Eo_circle_light-green_checkmark.svg/512px-Eo_circle_light-green_checkmark.svg.png'
-  const classIcon = mapCharacterClassToIcon(characterClass)
+  const classIcon = mapCharacterClassToIcon(character.characterClass)
   const fields = [
-    { name: 'Character', value: `${classIcon} ${name} (${iLvl})` }
+    { name: 'Character', value: `${classIcon} ${character.name} (${character.iLvl})` }
   ]
 
   return interaction.reply({ embeds: [renderEmbed({ title, thumbnailUrl, fields })], ephemeral: true })

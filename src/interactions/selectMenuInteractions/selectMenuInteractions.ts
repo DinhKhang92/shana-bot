@@ -4,6 +4,7 @@ import { SelectOptionValues } from '../../components/selectMenu/selectOptions'
 import { selectFinish } from './selectFinish'
 import { selectMode } from './selectMode'
 import { selectRaid } from './selectRaid'
+import { selectUpdate } from './selectUpdate'
 
 export const selectMenuInteractions = async (interaction: SelectMenuInteraction): Promise<void> => {
   const { customId } = interaction
@@ -17,6 +18,9 @@ export const selectMenuInteractions = async (interaction: SelectMenuInteraction)
       break
     case CustomId.SelectFinish:
       selectFinish(interaction)
+      break
+    case CustomId.CharacterUpdate:
+      selectUpdate(interaction)
       break
   }
 }

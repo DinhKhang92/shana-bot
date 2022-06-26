@@ -26,6 +26,7 @@ export enum CustomId {
     ButtonSend = 'button-send',
     ButtonJoin = 'button-join',
     ButtonLeave = 'button-leave',
+    CharacterUpdate = 'character-update',
 }
 
 export enum Icon {

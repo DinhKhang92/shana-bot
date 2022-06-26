@@ -1,7 +1,8 @@
 
 import { FirebaseApp, initializeApp } from 'firebase/app'
-import { Database, getDatabase, ref, set } from 'firebase/database'
+import { child, Database, get, getDatabase, onValue, ref, set, update } from 'firebase/database'
 import config from './config'
+import { Character } from './models/character'
 
 export class Firebase {
   app: FirebaseApp
@@ -22,7 +23,29 @@ export class Firebase {
     this.database = getDatabase(this.app, this.databaseUrl)
   }
 
-  public async writeToDatabase (data: string | Object, path?: string): Promise<void> {
+  public async writeToDatabase (data: string | object, path: string): Promise<void> {
     await set(ref(this.database, path), data)
+  }
+
+  public async updateDatabase (data: object, path: string): Promise<void> {
+    await update(ref(this.database, path), data)
+  }
+
+  public async getCharacters (path: string): Promise<Character[]> {
+    const databaseRef = ref(this.database)
+    const snapshot = await get(child(databaseRef, path))
+    if (snapshot.exists()) {
+      const charactersData = snapshot.val()
+      const characterKeys = Object.keys(charactersData)
+      const characters: Character[] = characterKeys.map((key) => ({
+        id: charactersData[key].id,
+        name: charactersData[key].name,
+        characterClass: charactersData[key].characterClass,
+        iLvl: charactersData[key].iLvl
+      }))
+
+      return characters
+    }
+    return []
   }
 }
