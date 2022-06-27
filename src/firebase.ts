@@ -1,6 +1,6 @@
 
 import { FirebaseApp, initializeApp } from 'firebase/app'
-import { child, Database, get, getDatabase, onValue, ref, set, update } from 'firebase/database'
+import { child, Database, get, getDatabase, onValue, ref, remove, set, update } from 'firebase/database'
 import config from './config'
 import { Character } from './models/character'
 
@@ -29,6 +29,10 @@ export class Firebase {
 
   public async updateDatabase (data: object, path: string): Promise<void> {
     await update(ref(this.database, path), data)
+  }
+
+  public async removeCharacter (path: string): Promise<void> {
+    await remove(ref(this.database, path))
   }
 
   public async getCharacters (path: string): Promise<Character[]> {
