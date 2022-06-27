@@ -24,7 +24,6 @@ export const selectMenuInteractions = async (interaction: SelectMenuInteraction)
       selectUpdate(interaction)
       break
     case CustomId.CharacterDelete:
-      console.log('DELETE')
       selectDelete(interaction)
       break
   }
