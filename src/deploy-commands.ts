@@ -7,7 +7,8 @@ import { CharaterClass } from './utils'
 export enum SlashCommands {
   Create = 'create',
   CharacterAdd = 'character-add',
-  CharacterUpdate = 'character-update'
+  CharacterUpdate = 'character-update',
+  CharacterDelete = 'character-delete'
 }
 
 export enum InputArgs {
@@ -46,7 +47,8 @@ const commands = [
       option.setName(InputArgs.Time)
         .setDescription('Time of event: hh:mm')
         .setRequired(true)),
-  new SlashCommandBuilder().setName(SlashCommands.CharacterUpdate).setDescription('Update character')
+  new SlashCommandBuilder().setName(SlashCommands.CharacterUpdate).setDescription('Update character'),
+  new SlashCommandBuilder().setName(SlashCommands.CharacterDelete).setDescription('Delete character')
 ]
 
 const rest = new REST({ version: '9' }).setToken(config.TOKEN)
