@@ -23,6 +23,7 @@ export enum CustomId {
     SelectRaid = 'select-raid',
     SelectMode = 'select-mode',
     SelectFinish = 'select-finish',
+    SelectCharacterJoin = 'select-character-join',
     ButtonSend = 'button-send',
     ButtonJoin = 'button-join',
     ButtonLeave = 'button-leave',

@@ -6,6 +6,7 @@ import { selectMode } from './selectMode'
 import { selectRaid } from './selectRaid'
 import { selectUpdate } from './selectUpdate'
 import { selectDelete } from './selectDelete'
+import { selectCharacterJoin } from './selectCharacterJoin'
 
 export const selectMenuInteractions = async (interaction: SelectMenuInteraction): Promise<void> => {
   const { customId } = interaction
@@ -25,6 +26,9 @@ export const selectMenuInteractions = async (interaction: SelectMenuInteraction)
       break
     case CustomId.CharacterDelete:
       selectDelete(interaction)
+      break
+    case CustomId.SelectCharacterJoin:
+      selectCharacterJoin(interaction)
       break
   }
 }

@@ -3,6 +3,7 @@ import { FirebaseApp, initializeApp } from 'firebase/app'
 import { child, Database, get, getDatabase, onValue, ref, remove, set, update } from 'firebase/database'
 import config from './config'
 import { Character } from './models/character'
+import { Lobby } from './models/lobby'
 
 export class Firebase {
   app: FirebaseApp
@@ -33,6 +34,16 @@ export class Firebase {
 
   public async removeCharacter (path: string): Promise<void> {
     await remove(ref(this.database, path))
+  }
+
+  public async getLobby (path: string): Promise<Lobby | undefined> {
+    const databaseRef = ref(this.database)
+    const snapshot = await get(child(databaseRef, path))
+    if (!snapshot.exists()) {
+      return undefined
+    }
+
+    return snapshot.val()
   }
 
   public async getCharacters (path: string): Promise<Character[]> {
