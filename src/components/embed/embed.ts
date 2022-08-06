@@ -1,5 +1,4 @@
-import { EmbedFieldData, MessageAttachment, MessageEmbed } from 'discord.js'
-import { Icon } from '../../utils'
+import { EmbedFieldData, MessageEmbed, MessageEmbedOptions } from 'discord.js'
 
 export enum Thumbnails {
   Valtan = 'https://static.wikia.nocookie.net/lostark_gamepedia/images/2/20/Valtan_Card_Portrait.png',
@@ -19,19 +18,8 @@ export interface EmbedProps {
   fields?: EmbedFieldData[] | EmbedFieldData[][],
 }
 
-export const renderEmbed = ({ title, thumbnailUrl, imageUrl, description, fields }: EmbedProps): MessageEmbed => {
-  const embed = new MessageEmbed()
-    .setColor('#0099ff')
-    .setTitle(title ?? '')
-    .setDescription(description ?? '')
-    .setThumbnail(thumbnailUrl ?? '') // https://lostarkcodex.com/icons/freindshipnpc_img_119.webp
-    .setImage(imageUrl ?? '')
-
-  if (fields !== undefined) {
-    embed.setFields(...fields)
-  }
-
-  return embed
+export const renderEmbed = (data?: MessageEmbed | MessageEmbedOptions): MessageEmbed => {
+  return new MessageEmbed(data)
 }
 
 // { name: '\u200B', value: '\u200B' },

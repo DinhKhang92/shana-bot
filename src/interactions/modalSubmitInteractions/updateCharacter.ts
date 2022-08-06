@@ -1,4 +1,4 @@
-import { ModalSubmitInteraction } from 'discord.js'
+import { MessageEmbedOptions, ModalSubmitInteraction } from 'discord.js'
 import { renderEmbed } from '../../components/embed/embed'
 import { InputArgs } from '../../deploy-commands'
 import { Firebase } from '../../firebase'
@@ -10,11 +10,15 @@ export const updateCharacter = async (interaction: ModalSubmitInteraction, uuid:
   const iLvlString = interaction.fields.getTextInputValue(InputArgs.ILvl)
 
   if (!isNumber(iLvlString)) {
-    const title = 'Update character failed'
-    const thumbnailUrl = 'https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_1280.png'
-    const description = `${iLvlString} is not a valid number.`
+    const embedData: MessageEmbedOptions = {
+      title: 'Update character failed',
+      thumbnail: {
+        url: 'https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_1280.png'
+      },
+      description: `${iLvlString} is not a valid number`
+    }
 
-    return interaction.reply({ embeds: [renderEmbed({ title, thumbnailUrl, description })], ephemeral: true })
+    return interaction.reply({ embeds: [renderEmbed(embedData)], ephemeral: true })
   }
 
   const updatedData = {
@@ -29,14 +33,16 @@ export const updateCharacter = async (interaction: ModalSubmitInteraction, uuid:
     return
   }
 
-  const title = `${character.name} was updated successfully`
-  const thumbnailUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Eo_circle_light-green_checkmark.svg/512px-Eo_circle_light-green_checkmark.svg.png'
   const classIcon = mapCharacterClassToIcon(character.characterClass)
-  const fields = [
-    { name: 'Character', value: `${classIcon} ${character.name} (${character.iLvl})` }
-  ]
+  const embedData: MessageEmbedOptions = {
+    title: `${character.name} was updated successfully`,
+    thumbnail: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Eo_circle_light-green_checkmark.svg/512px-Eo_circle_light-green_checkmark.svg.png'
+    },
+    fields: [{ name: 'Character', value: `${classIcon} ${character.name} (${character.iLvl})` }]
+  }
 
-  return interaction.update({ embeds: [renderEmbed({ title, thumbnailUrl, fields })], components: [] })
+  return interaction.update({ embeds: [renderEmbed(embedData)], components: [] })
 }
 
 const isNumber = (text: string): boolean => {

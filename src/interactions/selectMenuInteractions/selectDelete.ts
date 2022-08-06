@@ -1,4 +1,4 @@
-import { SelectMenuInteraction } from 'discord.js'
+import { MessageEmbedOptions, SelectMenuInteraction } from 'discord.js'
 import { renderEmbed } from '../../components/embed/embed'
 import { Firebase } from '../../firebase'
 import { mapCharacterClassToIcon } from '../../utils'
@@ -21,12 +21,14 @@ export const selectDelete = async (interaction: SelectMenuInteraction) => {
 
   await firebase.removeCharacter(`users/${interaction.user.id}/${uuid}`)
 
-  const title = `${character.name} was deleted successfully`
-  const thumbnailUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Eo_circle_light-green_checkmark.svg/512px-Eo_circle_light-green_checkmark.svg.png'
   const classIcon = mapCharacterClassToIcon(character.characterClass)
-  const fields = [
-    { name: 'Character', value: `${classIcon} ${character.name} (${character.iLvl})` }
-  ]
+  const embedData: MessageEmbedOptions = {
+    title: `${character.name} was deleted successfully`,
+    thumbnail: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Eo_circle_light-green_checkmark.svg/512px-Eo_circle_light-green_checkmark.svg.png'
+    },
+    fields: [{ name: 'Character', value: `${classIcon} ${character.name} (${character.iLvl})` }]
+  }
 
-  return interaction.update({ embeds: [renderEmbed({ title, thumbnailUrl, fields })], components: [] })
+  return interaction.update({ embeds: [renderEmbed(embedData)], components: [] })
 }

@@ -9,12 +9,12 @@ const firebase = new Firebase()
 
 export const characterUpdate = async (interaction: CommandInteraction) => {
   const characters = await firebase.getCharacters(`users/${interaction.user.id}`)
-  const selectiOptions: MessageSelectOptionData[] = characters.map((character: Character) => ({
+  const selectOptions: MessageSelectOptionData[] = characters.map((character: Character) => ({
     emoji: mapCharacterClassToIcon(character.characterClass), label: `${character.name} (${character.iLvl})`, value: character.id
   }))
 
   const row = actionRow([
-    selectMenu(CustomId.CharacterUpdate, undefined, selectiOptions)
+    selectMenu(CustomId.CharacterUpdate, undefined, selectOptions)
   ])
 
   return interaction.reply({ ephemeral: true, components: [row] })

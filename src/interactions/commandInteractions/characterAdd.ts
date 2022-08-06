@@ -1,4 +1,4 @@
-import { CommandInteraction } from 'discord.js'
+import { CommandInteraction, MessageEmbedOptions } from 'discord.js'
 import { v4 } from 'uuid'
 import { renderEmbed } from '../../components/embed/embed'
 import { InputArgs } from '../../deploy-commands'
@@ -18,12 +18,14 @@ export const characterAdd = (interaction: CommandInteraction) => {
 
   firebase.writeToDatabase(character, `users/${interaction.user.id}/${character.id}`)
 
-  const title = `${character.name} was added successfully`
-  const thumbnailUrl = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Eo_circle_light-green_checkmark.svg/512px-Eo_circle_light-green_checkmark.svg.png'
   const classIcon = mapCharacterClassToIcon(character.characterClass)
-  const fields = [
-    { name: 'Character', value: `${classIcon} ${character.name} (${character.iLvl})` }
-  ]
+  const embedData: MessageEmbedOptions = {
+    title: `${character.name} was added successfully`,
+    thumbnail: {
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Eo_circle_light-green_checkmark.svg/512px-Eo_circle_light-green_checkmark.svg.png'
+    },
+    fields: [{ name: 'Character', value: `${classIcon} ${character.name} (${character.iLvl})` }]
+  }
 
-  return interaction.reply({ embeds: [renderEmbed({ title, thumbnailUrl, fields })], ephemeral: true })
+  return interaction.reply({ embeds: [renderEmbed(embedData)], ephemeral: true })
 }
