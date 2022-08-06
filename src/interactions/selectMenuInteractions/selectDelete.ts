@@ -1,9 +1,7 @@
 import { MessageEmbedOptions, SelectMenuInteraction } from 'discord.js'
+import { firebase } from '../..'
 import { renderEmbed } from '../../components/embed/embed'
-import { Firebase } from '../../firebase'
 import { mapCharacterClassToIcon } from '../../utils'
-
-const firebase = new Firebase()
 
 export const selectDelete = async (interaction: SelectMenuInteraction) => {
   const selectionValues = interaction.values

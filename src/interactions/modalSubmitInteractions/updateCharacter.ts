@@ -1,10 +1,8 @@
 import { MessageEmbedOptions, ModalSubmitInteraction } from 'discord.js'
+import { firebase } from '../..'
 import { renderEmbed } from '../../components/embed/embed'
 import { InputArgs } from '../../deploy-commands'
-import { Firebase } from '../../firebase'
 import { mapCharacterClassToIcon } from '../../utils'
-
-const firebase = new Firebase()
 
 export const updateCharacter = async (interaction: ModalSubmitInteraction, uuid: string): Promise<void> => {
   const iLvlString = interaction.fields.getTextInputValue(InputArgs.ILvl)

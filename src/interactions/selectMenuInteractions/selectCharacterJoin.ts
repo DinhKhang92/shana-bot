@@ -1,6 +1,5 @@
 import { EmbedField, Message, SelectMenuInteraction } from 'discord.js'
-import { client } from '../..'
-import { Firebase } from '../../firebase'
+import { client, firebase } from '../..'
 import { Character } from '../../models/character'
 import { mapCharacterClassToIcon } from '../../utils'
 
@@ -11,8 +10,6 @@ interface MessageWithReference extends Message {
         messageId: string,
     }
 }
-
-const firebase = new Firebase()
 
 export const selectCharacterJoin = async (interaction: SelectMenuInteraction) => {
   const selectionValues = interaction.values

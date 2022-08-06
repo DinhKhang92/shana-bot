@@ -1,11 +1,9 @@
 import { CommandInteraction, MessageSelectOptionData } from 'discord.js'
+import { firebase } from '../..'
 import { actionRow } from '../../components/actionRow/actionRow'
 import { selectMenu } from '../../components/selectMenu/selectMenu'
-import { Firebase } from '../../firebase'
 import { Character } from '../../models/character'
 import { CustomId, mapCharacterClassToIcon } from '../../utils'
-
-const firebase = new Firebase()
 
 export const characterDelete = async (interaction: CommandInteraction) => {
   const characters = await firebase.getCharacters(`users/${interaction.user.id}`)

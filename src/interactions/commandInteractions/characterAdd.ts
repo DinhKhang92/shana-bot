@@ -1,12 +1,10 @@
 import { CommandInteraction, MessageEmbedOptions } from 'discord.js'
 import { v4 } from 'uuid'
+import { firebase } from '../..'
 import { renderEmbed } from '../../components/embed/embed'
 import { InputArgs } from '../../deploy-commands'
-import { Firebase } from '../../firebase'
 import { Character } from '../../models/character'
 import { mapCharacterClassToIcon } from '../../utils'
-
-const firebase = new Firebase()
 
 export const characterAdd = (interaction: CommandInteraction) => {
   const character: Character = {

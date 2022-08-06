@@ -1,12 +1,8 @@
 import { ButtonInteraction } from 'discord.js'
-
+import { firebase } from '../..'
 import { actionRow } from '../../components/actionRow/actionRow'
-import { renderEmbed } from '../../components/embed/embed'
 import { messageButton } from '../../components/messageButton/messageButton'
-import { Firebase } from '../../firebase'
-import { CustomId, Icon } from '../../utils'
-
-const firebase = new Firebase()
+import { CustomId } from '../../utils'
 
 export const sendRaid = async (interaction: ButtonInteraction): Promise<void> => {
   const embeds = interaction.message.embeds
